@@ -30,8 +30,8 @@ async def get_text(image_file: UploadFile = File(...)) -> OCRResponse:
 async def get_translations(translation_info: TranslationInfo = Body(...), image_file: UploadFile = File(...)) -> OCRResponse:
     ocr = Pytesseract(image=io.BytesIO(image_file.file.read()))
     text = await ocr.extract()
-    tran = DuckduckgoTranslator()
-    translated_text = await tran.translate(source_text=text, target_lang=translation_info.target_lang)
+    translator = DuckduckgoTranslator()
+    translated_text = await translator.translate(source_text=text, target_lang=translation_info.target_lang)
     return OCRResponse(
         status="success",
         status_code=201,
