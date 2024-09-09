@@ -1,0 +1,6 @@
+services:
+  api:
+    container_name: smart-len-service
+    build: .
+    ports:
+      - "${PORT}:3000"
