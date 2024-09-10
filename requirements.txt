@@ -6,3 +6,4 @@ python-multipart>=0.0.9
 pytesseract>=0.3.13
 pillow>=10.4.0
 duckduckgo-search>=6.2.11
+ollama>=0.3.3

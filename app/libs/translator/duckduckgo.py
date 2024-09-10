@@ -9,5 +9,6 @@ class DuckduckgoTranslator(TranslatorBase):
         self.ddgs = DDGS()
     
     async def translate(self, source_text: str, target_lang: str) -> str:
-        translated_text = self.ddgs.chat(f"Translate the following text to {target_lang}. Your answer should only contain the translated text: {source_text}")
+        prompt = f"Translate the following text to {target_lang}. Your answer should only contain the translated text: {source_text}"
+        translated_text = self.ddgs.chat(prompt)
         return translated_text

@@ -3,7 +3,7 @@ from datetime import datetime
 from app.typings.api_response import HealthResponse, OCRResponse, OCRResult
 from app.typings.translation import TranslationInfo
 from app.libs.ocr.pytesseract import Pytesseract
-from app.libs.translator.duckduckgo import DuckduckgoTranslator
+from app.libs.translator.ollama import OllamaChat
 import io
 
 app = FastAPI()
@@ -30,7 +30,7 @@ async def get_text(image_file: UploadFile = File(...)) -> OCRResponse:
 async def get_translations(translation_info: TranslationInfo = Body(...), image_file: UploadFile = File(...)) -> OCRResponse:
     ocr = Pytesseract(image=io.BytesIO(image_file.file.read()))
     text = await ocr.extract()
-    translator = DuckduckgoTranslator()
+    translator = OllamaChat()
     translated_text = await translator.translate(source_text=text, target_lang=translation_info.target_lang)
     return OCRResponse(
         status="success",
